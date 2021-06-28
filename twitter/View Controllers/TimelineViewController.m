@@ -8,8 +8,11 @@
 
 #import "TimelineViewController.h"
 #import "APIManager.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TimelineViewController ()
+
 
 @end
 
@@ -47,5 +50,16 @@
 }
 */
 
+- (IBAction)logout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil]; // Access Main.storyboard
+    
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]; // Call forth the login view controller
+    
+    appDelegate.window.rootViewController = loginViewController; // Switch to the login screen
+    
+    [[APIManager shared] logout];
+}
 
 @end
