@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -83,6 +84,8 @@
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
+    UIImage *image =  [UIImage imageWithData:urlData];
+    [cell.profileView setImage:image];
     return cell;
 }
 
