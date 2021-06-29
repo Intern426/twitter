@@ -12,7 +12,7 @@
 #import "LoginViewController.h"
 
 @interface TimelineViewController ()
-
+@property (strong, nonatomic) NSMutableArray* arrayofTweets;
 
 @end
 
@@ -25,10 +25,7 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (NSDictionary *dictionary in tweets) {
-                NSString *text = dictionary[@"text"];
-                NSLog(@"%@", text);
-            }
+            self.arrayofTweets = (NSMutableArray*) tweets;
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
