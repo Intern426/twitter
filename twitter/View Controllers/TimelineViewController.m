@@ -13,9 +13,12 @@
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
 
+
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray* arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivityView;
 
 @end
 
@@ -25,6 +28,10 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.loadingActivityView startAnimating];
+
+    [self.tableView insertSubview:self.refreshControl atIndex:0]; // controls where you put it in the view hierarchy
 
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
@@ -32,6 +39,8 @@
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.arrayOfTweets = (NSMutableArray*) tweets;
             [self.tableView reloadData];
+            [self.loadingActivityView stopAnimating];
+            [self.refreshControl endRefreshing];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
