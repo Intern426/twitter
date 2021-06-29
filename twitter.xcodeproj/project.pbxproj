@@ -17,6 +17,7 @@
 		6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD278F520BCB68B0085BC29 /* APIManager.m */; };
 		6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790520BCC0380085BC29 /* LoginViewController.m */; };
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
+		DE9F9A77268BCC89006DD81E /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9F9A76268BCC89006DD81E /* TweetCell.m */; };
 		DEBDD716268A62FA003D0F5A /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEBDD715268A62FA003D0F5A /* Keys.plist */; };
 		DEBDD719268A6F65003D0F5A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBDD718268A6F65003D0F5A /* User.m */; };
 		DEBDD71F268A7A43003D0F5A /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBDD71E268A7A43003D0F5A /* Tweet.m */; };
@@ -42,6 +43,8 @@
 		6AD2790720BCC04D0085BC29 /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		6AD2790820BCC04D0085BC29 /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		75895B6507775E8AFBEEA2D9 /* Pods-twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twitter/Pods-twitter.debug.xcconfig"; sourceTree = "<group>"; };
+		DE9F9A75268BCC89006DD81E /* TweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
+		DE9F9A76268BCC89006DD81E /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		DEBDD715268A62FA003D0F5A /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		DEBDD717268A6F65003D0F5A /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		DEBDD718268A6F65003D0F5A /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 		6AD278FF20BCBF280085BC29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DE9F9A75268BCC89006DD81E /* TweetCell.h */,
+				DE9F9A76268BCC89006DD81E /* TweetCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9F9A77268BCC89006DD81E /* TweetCell.m in Sources */,
 				DEBDD71F268A7A43003D0F5A /* Tweet.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				DEBDD719268A6F65003D0F5A /* User.m in Sources */,
