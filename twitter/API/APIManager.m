@@ -27,7 +27,6 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (instancetype)init {
-    
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     
     // Pull API Keys from your new Keys.plist file
@@ -37,7 +36,6 @@ static NSString * const baseURLString = @"https://api.twitter.com";
          NSString *key= [dict objectForKey: @"consumer_Key"];
          NSString *secret = [dict objectForKey: @"consumer_Secret"];
     
-
     // Check for launch arguments override
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"]) {
         key = [[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"];

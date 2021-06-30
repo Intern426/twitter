@@ -14,6 +14,7 @@
 #import "TweetCell.h"
 
 
+
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray* arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -28,12 +29,19 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.loadingActivityView startAnimating];
+    
+    [self loadTweets];
 
+    [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged]; //Deprecated and only used for older objects
     [self.tableView insertSubview:self.refreshControl atIndex:0]; // controls where you put it in the view hierarchy
 
+}
+
+-(void) loadTweets{
     // Get timeline
+    [self.loadingActivityView startAnimating];
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
@@ -45,10 +53,23 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
-}
+  /*  [self.loadingActivityView startAnimating];
+    NSURL *url = 
+    NSURLRequest *request = [NSURLRequest requestWithURL:nil cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
 
--(void) loadTweets{
-    
+    NSURLSessionDataTask *task = session dataTaskWithRequest:request completionHandler: [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            self.arrayOfTweets = (NSMutableArray*) tweets;
+            [self.tableView reloadData];
+            [self.loadingActivityView stopAnimating];
+            [self.refreshControl endRefreshing];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }]; */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,18 +78,18 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)logout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil]; // Access Main.storyboard
     
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]; // Call forth the login view controller
