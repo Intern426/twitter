@@ -74,6 +74,7 @@
     }]; */
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -111,6 +112,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet* tweet = self.arrayOfTweets[indexPath.row];
+    cell.tweet = tweet;
     cell.usernameLabel.text = tweet.user.name;
     cell.screenNameLabel.text = tweet.user.screenName;
     cell.bodyLabel.text = tweet.text;
@@ -119,6 +121,16 @@
     NSString *retweetCount = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     [cell.favoriteButton setTitle:favoriteCount forState:UIControlStateNormal];
     [cell.retweetButton setTitle:retweetCount forState:UIControlStateNormal];
+    
+    [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
+    [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
+    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+    
+    if(tweet.favorited == YES)
+        cell.favoriteButton.selected = YES;
+    if(tweet.retweeted == YES)
+        cell.retweetButton.selected = YES;
     
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
@@ -131,5 +143,6 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayOfTweets.count;
 }
+
 
 @end
