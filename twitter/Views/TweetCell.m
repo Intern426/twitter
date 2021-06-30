@@ -98,7 +98,7 @@
     }
 }
 
--(void) refreshData{
+-(void) refreshData {
     self.usernameLabel.text = self.tweet.user.name;
     self.bodyLabel.text = self.tweet.text;
     NSString *favoriteCount = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];

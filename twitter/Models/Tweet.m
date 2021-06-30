@@ -8,6 +8,7 @@
 
 #import "Tweet.h"
 #import "User.h"
+#import "DateTools.h"
 
 @implementation Tweet
 
@@ -15,13 +16,13 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-
+        
         // Handle retweet
         NSDictionary *originalTweet = dictionary[@"retweeted_status"];
         if(originalTweet != nil){
             NSDictionary *userDictionary = dictionary[@"user"];
             self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
-
+            
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
@@ -35,20 +36,37 @@
         // initialize user
         NSDictionary* user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
-
-
+        
         // Format createdAt date string
         NSString *createdAtOriginalString = dictionary[@"created_at"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        
         // Configure the input format to parse the date string
         formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+        
         // Convert String to Date
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
-        // Configure output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        // Convert Date to String
-        self.createdAtString = [formatter stringFromDate:date];
+        NSDate *today = [NSDate date];
+        
+        NSInteger yearsApart = [today yearsFrom:date];
+        NSInteger hoursApart = [today hoursFrom:date];
+        NSInteger minutesApart = [today minutesFrom:date];
+        
+        if (yearsApart == 0) {
+            // Format Date as # (hours/minutes) ago
+            if (hoursApart == 0) {
+                self.createdAtString = [NSString stringWithFormat:@"%dm", minutesApart];
+            } else if (hoursApart < 24){
+                self.createdAtString = [NSString stringWithFormat:@"%dh", hoursApart];
+            } else {
+                // Format Date as Month Day, Year
+                formatter.dateStyle = NSDateFormatterMediumStyle;
+            }
+        } else {
+            formatter.dateStyle = NSDateFormatterNoStyle;
+            formatter.timeStyle = NSDateFormatterShortStyle;
+            self.createdAtString = [formatter stringFromDate:date];
+        }
     }
     return self;
 }
