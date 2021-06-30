@@ -7,6 +7,8 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
+#import "Tweet.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -21,6 +23,16 @@
 }
 
 - (IBAction)tapTweet:(UIBarButtonItem *)sender {
+    if (self.textView.text.length != 0) {
+        [[APIManager shared] postStatusWithText:self.textView.text completion:^(Tweet *tweet, NSError *error) {
+           if (tweet) {
+               NSLog(@"😎😎😎 Successfully posted tweet");
+               [self dismissViewControllerAnimated:true completion:nil];
+           } else {
+               NSLog(@"😫😫😫 Error posting: %@", error.localizedDescription);
+           }
+       }];
+    }
 }
 
 - (IBAction)tapClose:(UIBarButtonItem *)sender {

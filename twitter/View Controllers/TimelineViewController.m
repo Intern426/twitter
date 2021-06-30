@@ -42,6 +42,7 @@
 -(void) loadTweets{
     // Get timeline
     [self.loadingActivityView startAnimating];
+    
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
