@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790520BCC0380085BC29 /* LoginViewController.m */; };
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
 		DE07D0AE268C220E0051FDFA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE07D0AD268C220E0051FDFA /* ComposeViewController.m */; };
+		DE682A6C268D2184003E3915 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE682A6B268D2184003E3915 /* DetailsViewController.m */; };
 		DE9F9A77268BCC89006DD81E /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9F9A76268BCC89006DD81E /* TweetCell.m */; };
 		DEBDD716268A62FA003D0F5A /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEBDD715268A62FA003D0F5A /* Keys.plist */; };
 		DEBDD719268A6F65003D0F5A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBDD718268A6F65003D0F5A /* User.m */; };
@@ -46,6 +47,8 @@
 		75895B6507775E8AFBEEA2D9 /* Pods-twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twitter/Pods-twitter.debug.xcconfig"; sourceTree = "<group>"; };
 		DE07D0AC268C220E0051FDFA /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		DE07D0AD268C220E0051FDFA /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		DE682A6A268D2184003E3915 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		DE682A6B268D2184003E3915 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		DE9F9A75268BCC89006DD81E /* TweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
 		DE9F9A76268BCC89006DD81E /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		DEBDD715268A62FA003D0F5A /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
 				DE07D0AC268C220E0051FDFA /* ComposeViewController.h */,
 				DE07D0AD268C220E0051FDFA /* ComposeViewController.m */,
+				DE682A6A268D2184003E3915 /* DetailsViewController.h */,
+				DE682A6B268D2184003E3915 /* DetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			files = (
 				DE9F9A77268BCC89006DD81E /* TweetCell.m in Sources */,
 				DEBDD71F268A7A43003D0F5A /* Tweet.m in Sources */,
+				DE682A6C268D2184003E3915 /* DetailsViewController.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				DE07D0AE268C220E0051FDFA /* ComposeViewController.m in Sources */,
 				DEBDD719268A6F65003D0F5A /* User.m in Sources */,
