@@ -33,7 +33,7 @@
     self.usernameLabel.text = self.tweet.user.name;
     self.screenNameLabel.text = self.tweet.user.screenName;
     self.bodyLabel.text = self.tweet.text;
-    self.dateLabel.text = self.tweet.createdAtString;
+    self.dateLabel.text = self.tweet.longDateString;
     self.likesLabel.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     self.retweetLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
     

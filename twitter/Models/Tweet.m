@@ -61,12 +61,15 @@
             } else {
                 // Format Date as Month Day, Year
                 formatter.dateStyle = NSDateFormatterMediumStyle;
+                self.createdAtString = [formatter stringFromDate:date];
             }
         } else {
             formatter.dateStyle = NSDateFormatterNoStyle;
             formatter.timeStyle = NSDateFormatterShortStyle;
             self.createdAtString = [formatter stringFromDate:date];
         }
+        formatter.dateStyle = NSDateFormatterMediumStyle;
+        self.longDateString = [formatter stringFromDate:date];
     }
     return self;
 }

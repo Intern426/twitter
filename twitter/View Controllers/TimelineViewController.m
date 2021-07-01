@@ -88,15 +88,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navigationControl = [segue destinationViewController];
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    Tweet* tweet = self.arrayOfTweets[indexPath.row];
-    if (tweet == nil) {
+    if ([sender isKindOfClass:UIBarButtonItem.class]) {
+        UINavigationController *navigationControl = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationControl.topViewController;
         composeController.delegate = self;
     } else {
-        
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet* tweet = self.arrayOfTweets[indexPath.row];
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.tweet = tweet;
     }
@@ -105,7 +104,7 @@
 
 - (void)didTweet:(Tweet *)tweet{
     [self.arrayOfTweets addObject:tweet];
-    [self.tableView reloadData];
+    [self loadTweets];
 }
 
 - (IBAction)logout:(id)sender {

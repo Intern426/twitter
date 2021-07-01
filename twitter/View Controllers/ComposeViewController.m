@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.textView.text = @"What's happening?";
+    self.textView.textColor = UIColor.grayColor;
 }
 
 - (IBAction)tapTweet:(UIBarButtonItem *)sender {
