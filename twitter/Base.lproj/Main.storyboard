@@ -168,13 +168,13 @@
                                             <outlet property="retweetButton" destination="LDQ-ZB-Fhg" id="bDv-MN-rZp"/>
                                             <outlet property="screenNameLabel" destination="6tj-AZ-oOX" id="M8n-Fu-KVw"/>
                                             <outlet property="usernameLabel" destination="UHm-b6-m0t" id="fXv-Ru-vSl"/>
-                                            <segue destination="wYK-C0-L0X" kind="show" destinationCreationSelector="prepareForSegueDetails:" id="Zra-7h-ani"/>
+                                            <segue destination="wYK-C0-L0X" kind="show" identifier="details" destinationCreationSelector="prepareForSegueDetails:" id="Zra-7h-ani"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-89-sMs">
-                                <rect key="frame" x="177" y="313" width="21" height="21"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-89-sMs">
+                                <rect key="frame" x="169" y="305" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -200,7 +200,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="edit-icon" id="cVc-Lb-wyl">
                             <connections>
-                                <segue destination="PPQ-Tt-qeq" kind="presentation" id="eoN-12-FXU"/>
+                                <segue destination="PPQ-Tt-qeq" kind="presentation" identifier="composeTweet" id="eoN-12-FXU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

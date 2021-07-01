@@ -16,23 +16,43 @@
     // Initialization code
 }
 
+- (void) setTweet:(Tweet *)tweet{
+    _tweet = tweet;
+    self.usernameLabel.text = tweet.user.name;
+    self.screenNameLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
+    self.bodyLabel.text = tweet.text;
+    self.dateLabel.text = tweet.createdAtString;
+    NSString *favoriteCount = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
+    NSString *retweetCount = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+    [self.favoriteButton setTitle:favoriteCount forState:UIControlStateNormal];
+    [self.retweetButton setTitle:retweetCount forState:UIControlStateNormal];
+    
+    [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
+    [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
+    [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+    
+    if(tweet.favorited == YES)
+        self.favoriteButton.selected = YES;
+    if(tweet.retweeted == YES)
+        self.retweetButton.selected = YES;
+    
+    NSString *URLString = tweet.user.profilePicture;
+    NSURL *url = [NSURL URLWithString:URLString];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    UIImage *image =  [UIImage imageWithData:urlData];
+    [self.profileView setImage:image];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-    [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    
-    [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
 }
 
 - (IBAction)didTapRetweet:(UIButton *)sender {
     if (self.tweet.retweeted == NO) {
+        //Retweet
         self.tweet.retweeted = YES;
         self.tweet.retweetCount++;
-        
-        [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-        
-        [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
         
         [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
@@ -45,6 +65,7 @@
             }
         }];
     } else {
+        // Unretweet
         self.tweet.retweeted = NO;
         self.tweet.retweetCount--;
         self.retweetButton.selected = NO;

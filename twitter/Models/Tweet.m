@@ -58,17 +58,15 @@
                 self.createdAtString = [NSString stringWithFormat:@"%dm", minutesApart];
             } else if (hoursApart < 24){
                 self.createdAtString = [NSString stringWithFormat:@"%dh", hoursApart];
-            } else {
-                // Format Date as Month Day, Year
-                formatter.dateStyle = NSDateFormatterMediumStyle;
-                self.createdAtString = [formatter stringFromDate:date];
             }
+            
         } else {
-            formatter.dateStyle = NSDateFormatterNoStyle;
-            formatter.timeStyle = NSDateFormatterShortStyle;
+            formatter.timeStyle = NSDateFormatterNoStyle;
+            formatter.dateStyle = NSDateFormatterMediumStyle;
             self.createdAtString = [formatter stringFromDate:date];
         }
         formatter.dateStyle = NSDateFormatterMediumStyle;
+        formatter.timeStyle = NSDateFormatterShortStyle;
         self.longDateString = [formatter stringFromDate:date];
     }
     return self;

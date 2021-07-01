@@ -33,11 +33,12 @@
     self.tableView.dataSource = self;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged]; //Deprecated and only used for older objects
+    [self.tableView insertSubview:self.refreshControl atIndex:0]; // controls where you put it in the view hierarchy
     
     [self loadTweets];
     
-    [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged]; //Deprecated and only used for older objects
-    [self.tableView insertSubview:self.refreshControl atIndex:0]; // controls where you put it in the view hierarchy
+    
     
 }
 
@@ -56,23 +57,6 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
-    /*  [self.loadingActivityView startAnimating];
-     NSURL *url =
-     NSURLRequest *request = [NSURLRequest requestWithURL:nil cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-     session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-     
-     NSURLSessionDataTask *task = session dataTaskWithRequest:request completionHandler: [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-     if (tweets) {
-     NSLog(@"😎😎😎 Successfully loaded home timeline");
-     self.arrayOfTweets = (NSMutableArray*) tweets;
-     [self.tableView reloadData];
-     [self.loadingActivityView stopAnimating];
-     [self.refreshControl endRefreshing];
-     } else {
-     NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-     }
-     }]; */
 }
 
 
@@ -88,7 +72,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([sender isKindOfClass:UIBarButtonItem.class]) {
+    if ([segue.identifier isEqual:@"composeTweet"]) {
         UINavigationController *navigationControl = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationControl.topViewController;
         composeController.delegate = self;
@@ -121,32 +105,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-    Tweet* tweet = self.arrayOfTweets[indexPath.row];
-    cell.tweet = tweet;
-    cell.usernameLabel.text = tweet.user.name;
-    cell.screenNameLabel.text = tweet.user.screenName;
-    cell.bodyLabel.text = tweet.text;
-    cell.dateLabel.text = tweet.createdAtString;
-    NSString *favoriteCount = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
-    NSString *retweetCount = [NSString stringWithFormat:@"%d", tweet.retweetCount];
-    [cell.favoriteButton setTitle:favoriteCount forState:UIControlStateNormal];
-    [cell.retweetButton setTitle:retweetCount forState:UIControlStateNormal];
-    
-    [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
-    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
-    
-    if(tweet.favorited == YES)
-        cell.favoriteButton.selected = YES;
-    if(tweet.retweeted == YES)
-        cell.retweetButton.selected = YES;
-    
-    NSString *URLString = tweet.user.profilePicture;
-    NSURL *url = [NSURL URLWithString:URLString];
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    UIImage *image =  [UIImage imageWithData:urlData];
-    [cell.profileView setImage:image];
+    cell.tweet = self.arrayOfTweets[indexPath.row];
     return cell;
 }
 
