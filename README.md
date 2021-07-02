@@ -46,8 +46,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. It would be nice to discuss asynchronous calls and reinforce the idea behind the APIManager's role. 
-2. Currently, the app incorporate one view controller going to two different view controllers - it would be nice to add another view controller but it was difficult to add a TapGestureRecognizer at the end. 
+1. It would be nice to discuss asynchronous calls and reinforce the idea behind the APIManager's role. It was a little unclear as to what made the "completion" methods so special. I got that the implicit contract between the object and error  alerted the user that the data was gathered successfully but what made it asynchronous as opposed to just being blocked. 
+2. While creating tabs was relatively straightforward, having the one view controller segue to two different view controllers (via a TapGestureController) was a little difficult to implement, so it would be nice to go over that.
 
 ## Video Walkthrough
 
@@ -57,7 +57,7 @@ Here's a walkthrough of implemented user stories:
 ![](https://i.imgur.com/CgxZcs6.gif)
 ![](https://i.imgur.com/ufXIB01.gif)
 ![](https://i.imgur.com/fHpjJf3.gif)
-![](https://i.imgur.com/v2ARfto.gif)
+![](https://i.imgur.com/rjnWo43.gif)
 
 
 GIF created with [Kap](https://getkap.co/).
@@ -68,6 +68,7 @@ Describe any challenges encountered while building the app.
 
 Initially, when you loaded the app, the empty table view would still display a bunch of lines while waiting for the asynchronous call to finish. Understanding why this occurred wasn't clear until I grasped what the asynchronous call was doing and I had to Google search to find a way to get the Table View to hide the lines (i.e. match it's parent View instead while it waited)
 
+Sometimes, AutoLayout didn't want to cooperate and the constraints wouldn't register other nearby views - thus they ended up binding to the end of the view instead of the neighboring object. When this happened, it was useful to just start over or even enlarge the views so that their scope was wider. 
 
 ## Credits
 
